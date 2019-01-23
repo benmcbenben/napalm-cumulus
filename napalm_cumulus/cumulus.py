@@ -553,7 +553,8 @@ class CumulusDriver(NetworkDriver):
                                                                     .format(af, peer))
                     dev_bgp_peer_advertised_routes = \
                         json.loads(bgp_peer_advertised_routes.replace('n\n', ''))
-                    peer_advertised_routes = dev_bgp_peer_advertised_routes['totalPrefixCounter']
+                    peer_advertised_routes = \
+                        dev_bgp_peer_advertised_routes.get('totalPrefixCounter', -1)
                     if not is_enabled:
                         dev_bgp_summary[af]['peers'][peer]['prefixReceivedCount'] = -1
                         peer_advertised_routes = -1
